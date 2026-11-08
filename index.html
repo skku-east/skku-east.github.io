@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKKU East Coast Team · Global Challenge 2027</title>
+<meta name="description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --text: #1f2328;
+    --muted: #656d76;
+    --line: #e6e8eb;
+    --soft: #f6f8fa;
+    --accent: #2f6fde;
+    --accent-soft: rgba(47,111,222,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117; --text: #e6edf3; --muted: #8d96a0; --line: #262c36; --soft: #161b22;
+      --accent: #5b9cff; --accent-soft: rgba(91,156,255,0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117; --text: #e6edf3; --muted: #8d96a0; --line: #262c36; --soft: #161b22;
+    --accent: #5b9cff; --accent-soft: rgba(91,156,255,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+  /* navbar */
+  header { position: sticky; top: 0; z-index: 10; background: var(--bg); border-bottom: 1px solid var(--line); }
+  header .container { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .site-title { font-weight: 300; font-size: 19px; color: var(--text); }
+  .site-title b { font-weight: 700; }
+  .site-title:hover { text-decoration: none; }
+  nav { display: flex; align-items: center; gap: 22px; font-size: 15px; }
+  nav a { color: var(--muted); }
+  nav a:hover { color: var(--accent); text-decoration: none; }
+  .theme-btn { background: none; border: 1px solid var(--line); color: var(--muted); border-radius: 8px; width: 34px; height: 34px; cursor: pointer; font-size: 15px; }
+  .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+  @media (max-width: 640px) { nav a { display: none; } }
+
+  /* about (hero) */
+  .about { padding: 64px 0 40px; display: grid; grid-template-columns: 1fr 200px; gap: 40px; align-items: start; }
+  .about h1 { font-size: clamp(30px, 5vw, 42px); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; }
+  .about h1 b { font-weight: 700; }
+  .about .sub { color: var(--muted); margin: 6px 0 22px; font-size: 15px; }
+  .about p { margin-bottom: 14px; }
+  .badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .badge { font-size: 13px; padding: 4px 10px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+  .route-card { border: 1px solid var(--line); border-radius: 12px; padding: 18px; background: var(--soft); }
+  .route-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; }
+  .route-list { list-style: none; position: relative; }
+  .route-list li:not(:last-child)::after { content: ""; position: absolute; left: 8px; top: 25px; bottom: -21px; width: 2px; background: var(--line); }
+  .route-list li { position: relative; padding-left: 32px; margin-bottom: 16px; font-size: 14px; }
+  .route-list li:last-child { margin-bottom: 0; }
+  .route-list li::before { content: ""; position: absolute; left: 0; top: 5px; width: 18px; height: 18px; box-sizing: border-box; border-radius: 50%; background: var(--soft); border: 3px solid var(--accent); z-index: 1; }
+  .route-list b { display: block; }
+  .route-list span { color: var(--muted); font-size: 13px; }
+  @media (max-width: 720px) { .about { grid-template-columns: 1fr; padding-top: 44px; } }
+
+  /* team photo */
+  .team-photo { margin: 0 0 44px; }
+  .team-photo .frame { width: 100%; aspect-ratio: 16 / 7; border-radius: 14px; overflow: hidden; background: var(--soft); border: 2px dashed var(--line); display: grid; place-items: center; color: var(--muted); font-size: 14px; text-align: center; }
+  .team-photo .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .team-photo .frame.has-img { border: none; }
+  .team-photo figcaption { margin-top: 10px; font-size: 13px; color: var(--muted); text-align: center; }
+  @media (max-width: 600px) { .team-photo .frame { aspect-ratio: 4 / 3; } }
+
+  /* sections */
+  section { padding: 36px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 18px; }
+  h2 .hash { color: var(--accent); font-weight: 400; margin-right: 6px; }
+  .lead { color: var(--muted); margin-bottom: 22px; }
+
+  /* journey table-ish */
+  .journey { display: grid; gap: 14px; }
+  .stage { display: grid; grid-template-columns: 150px 1fr; gap: 20px; padding: 18px 0; border-bottom: 1px dashed var(--line); }
+  .stage:last-child { border-bottom: none; }
+  .stage .city { font-weight: 600; }
+  .stage .city small { display: block; color: var(--accent); font-weight: 500; font-size: 13px; }
+  .stage p { color: var(--muted); font-size: 15px; }
+  .stage .q { margin-top: 8px; font-size: 14px; color: var(--text); }
+  .stage .q::before { content: "Q. "; color: var(--accent); font-weight: 600; }
+  @media (max-width: 600px) { .stage { grid-template-columns: 1fr; gap: 6px; } }
+
+  /* team */
+  .team { display: grid; gap: 0; }
+  .member { display: grid; grid-template-columns: 160px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .member:first-child { padding-top: 8px; }
+  .member:last-child { border-bottom: none; }
+  .avatar { width: 160px; height: 160px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-weight: 600; font-size: 44px; overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .member h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
+  .member .major { font-size: 15px; color: var(--muted); margin: 2px 0 14px; }
+  .member .major b { color: var(--accent); font-weight: 500; }
+  .member p { font-size: 15px; margin-bottom: 10px; }
+  .member .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 14px; }
+  .member .tag { font-size: 12px; padding: 3px 9px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
+  .member .links { display: flex; gap: 16px; font-size: 14px; }
+  .todo { color: #d1242f !important; }
+  @media (max-width: 600px) {
+    .member { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
+    .avatar { width: 120px; height: 120px; font-size: 34px; }
+  }
+
+  /* ask list */
+  .ask-list { list-style: none; display: grid; gap: 12px; }
+  .ask-list li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); }
+  .ask-list .n { color: var(--accent); font-weight: 500; font-size: 14px; padding-top: 2px; }
+  .ask-list b { display: block; margin-bottom: 2px; }
+  .ask-list span { color: var(--muted); font-size: 15px; }
+
+  /* faq */
+  details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+  details:first-of-type { border-top: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-size: 20px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { color: var(--muted); margin-top: 8px; font-size: 15px; }
+
+  /* news-like timeline */
+  .news { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .news td { padding: 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .news td:first-child { width: 120px; color: var(--muted); font-size: 14px; white-space: nowrap; }
+
+  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 13px; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a class="site-title" href="#top"><b>SKKU</b> East Coast Team</a>
+    <nav>
+      <a href="#journey">journey</a>
+      <a href="#team">team</a>
+      <a href="#mentors">for mentors</a>
+      <a href="#faq">faq</a>
+      <a href="#contact">contact</a>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container" id="top">
+
+  <!-- ABOUT -->
+  <div class="about">
+    <div>
+      <h1>We are <b>SKKU East.</b></h1>
+      <div class="sub">Sungkyunkwan University · Global Challenge Program · January 2027</div>
+      <p>Five undergraduate students from <a href="https://www.skku.edu/eng/" target="_blank" rel="noopener">Sungkyunkwan University</a> in Seoul, Korea, studying software and AI.</p>
+      <p>Through our university's Global Challenge program, we are visiting the U.S. East Coast to answer one question: <b>how does AI leave the lab and reach the world?</b> We want to see each step in person and learn from the people who make it happen.</p>
+      <div class="badges">
+        <span class="badge">📅 Mid–late January 2027</span>
+        <span class="badge">📍 Boston · New York · Washington DC</span>
+        <span class="badge">👥 5 students</span>
+      </div>
+    </div>
+    <aside class="route-card">
+      <div class="label mono">our route</div>
+      <ul class="route-list">
+        <li><b>Boston</b><span>Research</span></li>
+        <li><b>New York</b><span>Industry</span></li>
+        <li><b>Washington DC</b><span>Society &amp; Policy</span></li>
+      </ul>
+    </aside>
+  </div>
+
+  <!-- TEAM PHOTO
+       사진이 생기면: 1) 레포에 photos 폴더를 만들고 team.jpg 업로드 (가로 1600px 정도)
+                     2) 아래 .frame 안의 안내 문구를 <img src="photos/team.jpg" alt="SKKU East Coast Team"> 로 바꾸고
+                     3) class="frame" 을 class="frame has-img" 로 바꾸기 -->
+  <figure class="team-photo">
+    <div class="frame">📷 Team photo coming soon</div>
+    <figcaption>Our team at Sungkyunkwan University, Seoul</figcaption>
+  </figure>
+
+  <!-- JOURNEY -->
+  <section id="journey">
+    <h2><span class="hash mono">#</span>journey</h2>
+    <p class="lead">The East Coast is one of the few places where every stage of AI's journey sits on a single train line.</p>
+    <div class="journey">
+      <div class="stage">
+        <div class="city">Boston · Cambridge<small>Research</small></div>
+        <div>
+          <p>Universities, research labs and robotics companies turning ideas into working technology.</p>
+          <div class="q">What does it take for research to become a real product?</div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="city">New York<small>Industry</small></div>
+        <div>
+          <p>Tech companies and engineering teams delivering AI to millions of users.</p>
+          <div class="q">How do global teams build and ship AI together?</div>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="city">Washington DC<small>Society &amp; Policy</small></div>
+        <div>
+          <p>Standards bodies, policy institutes and public institutions deciding how AI is tested and used.</p>
+          <div class="q">Why should developers care about AI policy and standards?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <h2><span class="hash mono">#</span>team</h2>
+    <p class="lead">Students from Software and Global Convergence, looking at AI from both the builder's side and society's side.</p>
+    <div class="team">
+      <!-- To add a photo: replace the letters inside .avatar with <img src="photos/name.jpg" alt="Name"> -->
+      <div class="member">
+        <div class="avatar">KK</div>
+        <div>
+          <h3>Kyubeom Kim</h3>
+          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
+          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
+          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar">EK</div>
+        <div>
+          <h3>Eunha Kim</h3>
+          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
+          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
+          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar">JS</div>
+        <div>
+          <h3 class="todo">Jiwon Seo</h3>
+          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
+          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
+          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar">JL</div>
+        <div>
+          <h3 class="todo">Jiwoo Lee</h3>
+          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
+          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
+          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+        </div>
+      </div>
+      <div class="member">
+        <div class="avatar">JC</div>
+        <div>
+          <h3>Jimin Cheon</h3>
+          <div class="major">Software · <b>Sungkyunkwan University</b></div>
+          <p>Interested in on-device AI and AI agents. I have built AI agent projects and competed in programming contests, and I want to learn how AI research turns into products people actually use.</p>
+          <div class="tags"><span class="tag">On-device AI</span><span class="tag">AI Agents</span><span class="tag">Embedded Systems</span></div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR MENTORS -->
+  <section id="mentors">
+    <h2><span class="hash mono">#</span>for mentors</h2>
+    <p class="lead">We know your time is valuable. Even a short conversation would mean a lot to us and to the students we will share it with back home.</p>
+    <ul class="ask-list">
+      <li><span class="n mono">01</span><div><b>A 20–30 minute conversation</b><span>In person during our visit, or online if that is easier for you.</span></div></li>
+      <li><span class="n mono">02</span><div><b>Your path and your team</b><span>How you got here, how your team works, and what you would tell students starting out.</span></div></li>
+      <li><span class="n mono">03</span><div><b>Questions sent in advance</b><span>We will share our questions ahead of time, so there is nothing for you to prepare.</span></div></li>
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2><span class="hash mono">#</span>faq</h2>
+    <details>
+      <summary>How long will it take?</summary>
+      <p>About 20–30 minutes. We are happy to work around your schedule.</p>
+    </details>
+    <details>
+      <summary>Where would we meet?</summary>
+      <p>Wherever is convenient for you: your office, a café nearby, or online.</p>
+    </details>
+    <details>
+      <summary>Will the conversation be recorded or shared?</summary>
+      <p>Only with your permission. If we share anything, we will send it to you for review first.</p>
+    </details>
+    <details>
+      <summary>What is the Global Challenge program?</summary>
+      <p>A program supported by Sungkyunkwan University that sends student teams abroad to explore a topic in depth and bring what they learn back to campus. SKKU, founded in 1398, is one of Korea's leading universities.</p>
+    </details>
+  </section>
+
+  <!-- AFTER THE TRIP -->
+  <section id="after">
+    <h2><span class="hash mono">#</span>after the trip</h2>
+    <table class="news">
+      <tr><td class="mono">Feb 2027</td><td>Publish a trip report and interview notes on this site (with mentors' permission).</td></tr>
+      <tr><td class="mono">Mar 2027</td><td>Host a sharing seminar for students in our department.</td></tr>
+    </table>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2><span class="hash mono">#</span>contact</h2>
+    <p>Feel free to reach out by email, or connect with any of us on LinkedIn.</p>
+    <p style="margin-top:10px"><a class="mono" href="mailto:cheonjimin76@g.skku.edu">cheonjimin76@g.skku.edu</a></p>
+  </section>
+
+</main>
+
+<footer>
+  © 2027 SKKU East Coast Team · Sungkyunkwan University Global Challenge
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  btn.addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+</script>
+</body>
+</html>
