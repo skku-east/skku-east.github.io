@@ -5,6 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SKKU East Coast Team · Global Challenge 2027</title>
 <meta name="description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
+<!-- 검색 노출 막기: 구글·네이버 등 검색 결과와 이미지 검색에 이 페이지와 사진이 뜨지 않게 함
+     (링크를 받은 사람은 그대로 볼 수 있고, 링크 미리보기 카드도 그대로 뜸). 검색에 노출하려면 이 줄을 지우기 -->
+<meta name="robots" content="noindex, noimageindex">
+<!-- 링크 미리보기 (카톡·이메일·LinkedIn 등에 주소를 붙였을 때 뜨는 카드)
+     단체 사진이 생기면 아래 두 줄을 추가하고 twitter:card 를 summary_large_image 로 바꾸기 (주소는 https:// 부터 전체로)
+       <meta property="og:image" content="https://skku-east.github.io/photos/team.jpg">
+       <meta name="twitter:image" content="https://skku-east.github.io/photos/team.jpg"> -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://skku-east.github.io/">
+<meta property="og:site_name" content="SKKU East Coast Team">
+<meta property="og:title" content="SKKU East Coast Team · Global Challenge 2027">
+<meta property="og:description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ko_KR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SKKU East Coast Team · Global Challenge 2027">
+<meta name="twitter:description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,7 +47,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
+  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; -webkit-font-smoothing: antialiased; transition: background .2s, color .2s; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
   .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
@@ -102,12 +119,12 @@
   .avatar img { width: 100%; height: 100%; object-fit: cover; }
   .member h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.3; }
   .member .major { font-size: 15px; color: var(--muted); margin: 2px 0 14px; }
-  .member .major b { color: var(--accent); font-weight: 500; }
   .member p { font-size: 15px; margin-bottom: 10px; }
+  .member p.goal { margin-top: 2px; padding-left: 14px; border-left: 2px solid var(--accent); }
   .member .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 14px; }
   .member .tag { font-size: 12px; padding: 3px 9px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); color: var(--muted); }
   .member .links { display: flex; gap: 16px; font-size: 14px; }
-  .todo { color: #d1242f !important; }
+  .nowrap { white-space: nowrap; }
   @media (max-width: 600px) {
     .member { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
     .avatar { width: 120px; height: 120px; font-size: 34px; }
@@ -135,7 +152,24 @@
   .news td:first-child { width: 120px; color: var(--muted); font-size: 14px; white-space: nowrap; }
 
   footer { border-top: 1px solid var(--line); padding: 28px 0 40px; color: var(--muted); font-size: 13px; text-align: center; }
+
+  /* language switch: text is written twice (lang="en" / lang="ko"), only the active one shows */
+  html:not([data-lang="ko"]) [lang="ko"], html[data-lang="ko"] [lang="en"] { display: none !important; }
+  [lang="ko"] { word-break: keep-all; }
+  .nav-btns { display: flex; gap: 8px; }
+  .lang-btn { font-size: 12px; font-weight: 500; letter-spacing: .02em; }
 </style>
+<script>
+  (function () {
+    var l = 'en';
+    try {
+      var q = new URLSearchParams(location.search).get('lang');
+      l = (q === 'ko' || q === 'en') ? q : (localStorage.getItem('lang') === 'ko' ? 'ko' : 'en');
+    } catch (e) {}
+    document.documentElement.dataset.lang = l;
+    document.documentElement.lang = l;
+  })();
+</script>
 </head>
 <body>
 
@@ -143,74 +177,95 @@
   <div class="container">
     <a class="site-title" href="#top"><b>SKKU</b> East Coast Team</a>
     <nav>
-      <a href="#journey">journey</a>
-      <a href="#team">team</a>
-      <a href="#mentors">for mentors</a>
-      <a href="#faq">faq</a>
-      <a href="#contact">contact</a>
-      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button>
+      <a href="#journey"><span lang="en">Journey</span><span lang="ko">여정</span></a>
+      <a href="#team"><span lang="en">Team</span><span lang="ko">팀</span></a>
+      <a href="#mentors"><span lang="en">For Mentors</span><span lang="ko">멘토님께</span></a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact"><span lang="en">Contact</span><span lang="ko">연락처</span></a>
+      <div class="nav-btns">
+        <button class="theme-btn lang-btn mono" id="langBtn" type="button" aria-label="한국어로 보기">KO</button>
+        <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">◐</button>
+      </div>
     </nav>
   </div>
 </header>
 
+<!-- 언어 전환: 글은 lang="en" / lang="ko" 로 두 번씩 적혀 있고, 선택한 언어만 보입니다.
+     글을 고칠 때는 영어·한국어 둘 다 고쳐주세요. 기본은 영어, 주소 뒤에 ?lang=ko 를 붙이면 한국어로 열립니다. -->
 <main class="container" id="top">
 
   <!-- ABOUT -->
   <div class="about">
     <div>
-      <h1>We are <b>SKKU East.</b></h1>
-      <div class="sub">Sungkyunkwan University · Global Challenge Program · January 2027</div>
-      <p>Five undergraduate students from <a href="https://www.skku.edu/eng/" target="_blank" rel="noopener">Sungkyunkwan University</a> in Seoul, Korea, studying software and AI.</p>
-      <p>Through our university's Global Challenge program, we are visiting the U.S. East Coast to answer one question: <b>how does AI leave the lab and reach the world?</b> We want to see each step in person and learn from the people who make it happen.</p>
+      <h1 lang="en">We are <b>SKKU East.</b></h1>
+      <h1 lang="ko">저희는 <b>SKKU East</b>입니다.</h1>
+      <div class="sub" lang="en">Sungkyunkwan University · Global Challenge Program · January 2027</div>
+      <div class="sub" lang="ko">성균관대학교 · 글로벌 챌린지 프로그램 · 2027년 1월</div>
+      <p lang="en">Five undergraduate students from <a href="https://www.skku.edu/eng/" target="_blank" rel="noopener">Sungkyunkwan University</a> in Seoul, Korea, studying software and AI.</p>
+      <p lang="ko">서울 <a href="https://www.skku.edu/" target="_blank" rel="noopener">성균관대학교</a>에서 소프트웨어와 AI를 공부하는 학부생 5명입니다.</p>
+      <p lang="en">Through our university's Global Challenge program, we are visiting the U.S. East Coast to answer one question: <b>how does AI move from research to industry to society?</b> We want to see each step in person and learn from the people who make it happen.</p>
+      <p lang="ko">학교의 글로벌 챌린지 프로그램으로 미국 동부를 방문해 한 가지 질문의 답을 찾으려 합니다. <b>AI는 어떻게 연구에서 산업으로, 그리고 사회로 이어질까?</b> 그 과정의 각 단계를 직접 보고, 그 일을 해내는 사람들에게 배우고 싶습니다.</p>
       <div class="badges">
-        <span class="badge">📅 Mid–late January 2027</span>
-        <span class="badge">📍 Boston · New York · Washington DC</span>
-        <span class="badge">👥 5 students</span>
+        <span class="badge" lang="en">📅 Mid–late January 2027</span>
+        <span class="badge" lang="ko">📅 2027년 1월 중순~하순</span>
+        <span class="badge" lang="en">📍 Boston · New York · Washington DC</span>
+        <span class="badge" lang="ko">📍 보스턴 · 뉴욕 · 워싱턴 DC</span>
+        <span class="badge" lang="en">👥 5 students</span>
+        <span class="badge" lang="ko">👥 학생 5명</span>
       </div>
     </div>
     <aside class="route-card">
-      <div class="label mono">our route</div>
+      <div class="label mono"><span lang="en">our route</span><span lang="ko">이동 경로</span></div>
       <ul class="route-list">
-        <li><b>Boston</b><span>Research</span></li>
-        <li><b>New York</b><span>Industry</span></li>
-        <li><b>Washington DC</b><span>Society &amp; Policy</span></li>
+        <li><b lang="en">Boston</b><b lang="ko">보스턴</b><span lang="en">Research</span><span lang="ko">연구</span></li>
+        <li><b lang="en">New York</b><b lang="ko">뉴욕</b><span lang="en">Industry</span><span lang="ko">산업</span></li>
+        <li><b lang="en">Washington DC</b><b lang="ko">워싱턴 DC</b><span lang="en">Society &amp; Policy</span><span lang="ko">사회 · 정책</span></li>
       </ul>
     </aside>
   </div>
 
-  <!-- TEAM PHOTO
-       사진이 생기면: 1) 레포에 photos 폴더를 만들고 team.jpg 업로드 (가로 1600px 정도)
-                     2) 아래 .frame 안의 안내 문구를 <img src="photos/team.jpg" alt="SKKU East Coast Team"> 로 바꾸고
-                     3) class="frame" 을 class="frame has-img" 로 바꾸기 -->
+  <!-- TEAM PHOTO: 단체 사진은 추후 업로드 예정 (지금은 공간을 숨겨둠)
+       사진이 생기면:
+         1) photos/team.jpg 업로드 (가로 1600px 정도, sRGB로 저장)
+         2) 아래 figure 코드를 주석 밖으로 꺼내기 (CSS는 이미 있음)
+
   <figure class="team-photo">
-    <div class="frame">📷 Team photo coming soon</div>
-    <figcaption>Our team at Sungkyunkwan University, Seoul</figcaption>
+    <div class="frame has-img"><img src="photos/team.jpg" alt="SKKU East Coast Team"></div>
+    <figcaption><span lang="en">Our team at Sungkyunkwan University, Seoul</span><span lang="ko">서울 성균관대학교에서</span></figcaption>
   </figure>
+  -->
 
   <!-- JOURNEY -->
   <section id="journey">
-    <h2><span class="hash mono">#</span>journey</h2>
-    <p class="lead">The East Coast is one of the few places where every stage of AI's journey sits on a single train line.</p>
+    <h2><span class="hash mono">#</span><span lang="en">Journey</span><span lang="ko">여정</span></h2>
+    <p class="lead" lang="en">The East Coast is one of the few places where every stage of AI's journey sits on a single train line.</p>
+    <p class="lead" lang="ko">미국 동부는 보스턴, 뉴욕, 워싱턴 DC가 기차로 이어져 있어 AI의 연구, 산업, 정책 현장을 한 번에 둘러볼 수 있는 몇 안 되는 곳입니다.</p>
     <div class="journey">
       <div class="stage">
-        <div class="city">Boston · Cambridge<small>Research</small></div>
+        <div class="city"><span lang="en">Boston · Cambridge</span><span lang="ko">보스턴 · 케임브리지</span><small lang="en">Research</small><small lang="ko">연구</small></div>
         <div>
-          <p>Universities, research labs and robotics companies turning ideas into working technology.</p>
-          <div class="q">What does it take for research to become a real product?</div>
+          <p lang="en">Universities, research labs and robotics companies turning ideas into working technology.</p>
+          <p lang="ko">대학, 연구소, 로봇 기업이 아이디어를 실제로 작동하는 기술로 만드는 곳.</p>
+          <div class="q" lang="en">What does it take for research to become a real product?</div>
+          <div class="q" lang="ko">연구가 실제 제품이 되려면 무엇이 필요할까?</div>
         </div>
       </div>
       <div class="stage">
-        <div class="city">New York<small>Industry</small></div>
+        <div class="city"><span lang="en">New York</span><span lang="ko">뉴욕</span><small lang="en">Industry</small><small lang="ko">산업</small></div>
         <div>
-          <p>Tech companies and engineering teams delivering AI to millions of users.</p>
-          <div class="q">How do global teams build and ship AI together?</div>
+          <p lang="en">Tech companies and engineering teams delivering AI to millions of users.</p>
+          <p lang="ko">테크 기업과 엔지니어링 팀이 수백만 명의 사용자에게 AI를 전달하는 곳.</p>
+          <div class="q" lang="en">How do global teams build and ship AI together?</div>
+          <div class="q" lang="ko">글로벌 팀은 어떻게 함께 AI를 만들고 출시할까?</div>
         </div>
       </div>
       <div class="stage">
-        <div class="city">Washington DC<small>Society &amp; Policy</small></div>
+        <div class="city"><span lang="en">Washington DC</span><span lang="ko">워싱턴 DC</span><small lang="en">Society &amp; Policy</small><small lang="ko">사회 · 정책</small></div>
         <div>
-          <p>Standards bodies, policy institutes and public institutions deciding how AI is tested and used.</p>
-          <div class="q">Why should developers care about AI policy and standards?</div>
+          <p lang="en">Standards bodies, policy institutes and public institutions deciding how AI is tested and used.</p>
+          <p lang="ko">표준 기관, 정책 연구소, 공공기관이 AI를 어떻게 검증하고 쓸지 정하는 곳.</p>
+          <div class="q" lang="en">Why should developers care about AI policy and standards?</div>
+          <div class="q" lang="ko">개발자는 왜 AI 정책과 표준에 관심을 가져야 할까?</div>
         </div>
       </div>
     </div>
@@ -218,58 +273,82 @@
 
   <!-- TEAM -->
   <section id="team">
-    <h2><span class="hash mono">#</span>team</h2>
-    <p class="lead">Students from Software and Global Convergence, looking at AI from both the builder's side and society's side.</p>
+    <h2><span class="hash mono">#</span><span lang="en">Team</span><span lang="ko">팀</span></h2>
+    <p class="lead" lang="en">Students from computer science, AI, and business backgrounds, looking at AI from both the builder's side and society's side.</p>
+    <p class="lead" lang="ko">컴퓨터공학, AI, 경영을 공부하는 학생들이 AI를 만드는 사람의 시선과 사회의 시선에서 함께 바라봅니다.</p>
     <div class="team">
-      <!-- To add a photo: replace the letters inside .avatar with <img src="photos/name.jpg" alt="Name"> -->
+      <!-- 소개글: 첫 번째 p = 본문, p class="goal" = 방문 목표 (파란 선). 영어/한국어 둘 다 있음 -->
       <div class="member">
-        <div class="avatar">KK</div>
+        <div class="avatar"><img src="photos/kyubeom.jpg" alt="Kyu Beom Kim"></div>
         <div>
-          <h3>Kyubeom Kim</h3>
-          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
-          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
-          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
-          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+          <h3 lang="en">Kyu Beom Kim</h3>
+          <h3 lang="ko">김규범</h3>
+          <div class="major" lang="en">Computer Science &amp; Engineering</div>
+          <div class="major" lang="ko">컴퓨터공학과</div>
+          <p lang="en">I'm interested in developing software that makes AI systems safer and more trustworthy. In particular, I want to further explore technologies that verify the evidence behind AI-generated responses and protect AI systems against malicious inputs and cybersecurity threats.</p>
+          <p lang="ko">AI 시스템을 더 안전하고 신뢰할 수 있게 만드는 소프트웨어 개발에 관심이 있습니다. 특히 AI가 생성한 답변의 근거를 검증하고, 악의적인 입력과 사이버 보안 위협으로부터 AI 시스템을 보호하는 기술을 더 깊이 탐구하고 싶습니다.</p>
+          <p class="goal" lang="en">Through this visit, I hope to see how institutions and companies in the U.S. approach AI reliability and security.</p>
+          <p class="goal" lang="ko">이번 방문을 통해 미국의 기관과 기업이 AI의 신뢰성과 보안을 어떻게 다루는지 직접 보고 싶습니다.</p>
+          <div class="tags"><span class="tag">Trustworthy AI</span><span class="tag">AI Security</span></div>
+          <div class="links"><a href="https://www.linkedin.com/in/%EA%B9%80%EA%B7%9C%EB%B2%94-%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4%ED%95%99%EA%B3%BC-397bba447/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/kimmykimmim" target="_blank" rel="noopener">GitHub</a></div>
         </div>
       </div>
       <div class="member">
-        <div class="avatar">EK</div>
+        <div class="avatar"><img src="photos/eunha.jpg" alt="Eunha Kim"></div>
         <div>
-          <h3>Eunha Kim</h3>
-          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
-          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
-          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
-          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+          <h3 lang="en">Eunha Kim</h3>
+          <h3 lang="ko">김은하</h3>
+          <div class="major" lang="en">Artificial Intelligence Convergence / Business Administration</div>
+          <div class="major" lang="ko">인공지능융합전공 / 경영학</div>
+          <p lang="en">I'm interested in exploring how emerging technologies can transform creative content and the ways audiences interact with it. My primary interests include generative and multimodal AI, XR, real-time computer graphics, and interactive systems, particularly their potential to create new forms of expression and immersive experiences in performing arts and digital media.</p>
+          <p lang="ko">새로운 기술이 창작 콘텐츠와, 관객이 그 콘텐츠와 상호작용하는 방식을 어떻게 바꿀 수 있는지에 관심이 있습니다. 주된 관심 분야는 생성형·멀티모달 AI, XR, 실시간 컴퓨터 그래픽스, 인터랙티브 시스템이며, 특히 이 기술들이 공연예술과 디지털 미디어에서 새로운 표현 방식과 몰입형 경험을 만들어낼 가능성에 주목하고 있습니다.</p>
+          <p class="goal" lang="en">Through this visit, I hope to learn how these technologies are developed and applied in real-world industries, from technical architectures and development processes to the collaboration between creative and technical disciplines that brings innovative ideas to life.</p>
+          <p class="goal" lang="ko">이번 방문을 통해 이 기술들이 실제 산업에서 어떻게 개발되고 적용되는지, 기술 구조와 개발 과정부터 혁신적인 아이디어를 현실로 만드는 창작과 기술 분야 간의 협업까지 배우고 싶습니다.</p>
+          <div class="tags"><span class="tag">Generative &amp; Multimodal AI</span><span class="tag">XR</span><span class="tag">Interactive Systems</span></div>
         </div>
       </div>
       <div class="member">
-        <div class="avatar">JS</div>
+        <div class="avatar"><img src="photos/jiwon.jpg" alt="Jiwon Seo"></div>
         <div>
-          <h3 class="todo">Jiwon Seo</h3>
-          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
-          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
-          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
-          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+          <h3 lang="en">Jiwon Seo</h3>
+          <h3 lang="ko">서지원</h3>
+          <div class="major" lang="en">Computer Science &amp; Engineering</div>
+          <div class="major" lang="ko">컴퓨터공학과</div>
+          <p lang="en">I'm interested in the systems side of AI, from LLM serving down to the processor. I built an on-premise RAG chatbot with an industry partner, serving its models with vLLM on our own GPUs, and I'm now building a gem5-based simulation flow that measures multicore CPU performance, power, and temperature.</p>
+          <p lang="ko">LLM 서빙부터 프로세서까지, AI의 시스템 쪽에 관심이 있습니다. 산업체와 함께 온프레미스 RAG 챗봇을 만들어 자체 GPU에서 vLLM으로 모델을 서빙했고, 지금은 멀티코어 CPU의 성능, 전력, 온도를 측정하는 gem5 기반 시뮬레이션 환경을 만들고 있습니다.</p>
+          <p class="goal" lang="en">On this trip, I want to learn how teams decide where and how to run AI models in production.</p>
+          <p class="goal" lang="ko">이번 방문에서는 실제 서비스 환경에서 AI 모델을 어디서, 어떻게 돌릴지 팀들이 어떻게 결정하는지 배우고 싶습니다.</p>
+          <div class="tags"><span class="tag">Computer Architecture</span><span class="tag">LLM Serving</span></div>
         </div>
       </div>
       <div class="member">
-        <div class="avatar">JL</div>
+        <div class="avatar"><img src="photos/jiwoo.jpg" alt="Jiwoo Lee"></div>
         <div>
-          <h3 class="todo">Jiwoo Lee</h3>
-          <div class="major todo">[major] · <b>Sungkyunkwan University</b></div>
-          <p class="todo">[2–3 sentences: what you study, what you are interested in, and what you want to learn on this trip.]</p>
-          <div class="tags"><span class="tag todo">[interest]</span><span class="tag todo">[interest]</span></div>
-          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+          <h3 lang="en">Jiwoo Lee</h3>
+          <h3 lang="ko">이지우</h3>
+          <div class="major" lang="en">Applied Artificial Intelligence</div>
+          <div class="major" lang="ko">인공지능융합전공</div>
+          <p lang="en">I study Applied Artificial Intelligence at Sungkyunkwan University, focusing on deep learning and applying it through AI service design and prototype development. I'm interested in both multimodal AI research and how organizations use AI to improve their work and shape their IT strategies.</p>
+          <p lang="ko">성균관대학교에서 인공지능융합을 전공하며 딥러닝을 중심으로 공부하고, 이를 AI 서비스 기획과 프로토타입 개발에 적용하고 있습니다. 멀티모달 AI 연구와 함께, 조직이 AI로 업무를 개선하고 IT 전략을 세우는 방식에도 관심이 있습니다.</p>
+          <p class="goal" lang="en">Through this visit, I hope to learn from professionals in these areas and explore where my interests could lead.</p>
+          <p class="goal" lang="ko">이번 방문을 통해 이 분야의 전문가들에게 배우고, 제 관심사가 어디로 이어질 수 있을지 탐색하고 싶습니다.</p>
+          <div class="tags"><span class="tag">Deep Learning</span><span class="tag">AI Transformation</span></div>
+          <div class="links"><a href="https://www.linkedin.com/in/jiwoo-lee-3106a9302/" target="_blank" rel="noopener">LinkedIn</a></div>
         </div>
       </div>
       <div class="member">
-        <div class="avatar">JC</div>
+        <div class="avatar"><img src="photos/jimin.jpg" alt="Jimin Cheon"></div>
         <div>
-          <h3>Jimin Cheon</h3>
-          <div class="major">Software · <b>Sungkyunkwan University</b></div>
-          <p>Interested in on-device AI and AI agents. I have built AI agent projects and competed in programming contests, and I want to learn how AI research turns into products people actually use.</p>
-          <div class="tags"><span class="tag">On-device AI</span><span class="tag">AI Agents</span><span class="tag">Embedded Systems</span></div>
-          <div class="links"><a href="#" target="_blank" rel="noopener">LinkedIn</a><a href="#" target="_blank" rel="noopener">GitHub</a><a href="#">Email</a></div>
+          <h3 lang="en">Jimin Cheon</h3>
+          <h3 lang="ko">천지민</h3>
+          <div class="major" lang="en">Computer Science &amp; Engineering</div>
+          <div class="major" lang="ko">컴퓨터공학과</div>
+          <p lang="en">I'm interested in AI systems, especially LLM agents and <span class="nowrap">On-Device AI</span>, and how AI software and hardware work together. I'm particularly curious about how research in the U.S. connects closely with industry and turns new ideas into real-world impact.</p>
+          <p lang="ko">AI 시스템, 특히 LLM 에이전트와 온디바이스 AI, 그리고 AI 소프트웨어와 하드웨어가 함께 동작하는 방식에 관심이 있습니다. 그중에서도 미국에서 연구가 산업과 긴밀하게 연결되어 새로운 아이디어가 실제 임팩트로 이어지는 과정이 궁금합니다.</p>
+          <p class="goal" lang="en">Through this visit, I hope to see how AI research is actually done at U.S. universities and companies, and to explore future paths such as graduate school or a career in the U.S.</p>
+          <p class="goal" lang="ko">이번 방문을 통해 미국의 대학과 기업에서 AI 연구가 실제로 어떻게 이루어지는지 보고, 미국 대학원 진학이나 취업 같은 앞으로의 진로도 탐색하고 싶습니다.</p>
+          <div class="tags"><span class="tag">On-Device AI</span><span class="tag">AI Agents</span><span class="tag">Embedded Systems</span></div>
+          <div class="links"><a href="https://www.linkedin.com/in/jimin-cheon/" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/jimin326" target="_blank" rel="noopener">GitHub</a><a href="mailto:cheonjimin76@g.skku.edu">Email</a></div>
         </div>
       </div>
     </div>
@@ -277,66 +356,96 @@
 
   <!-- FOR MENTORS -->
   <section id="mentors">
-    <h2><span class="hash mono">#</span>for mentors</h2>
-    <p class="lead">We know your time is valuable. Even a short conversation would mean a lot to us and to the students we will share it with back home.</p>
+    <h2><span class="hash mono">#</span><span lang="en">For Mentors</span><span lang="ko">멘토님께</span></h2>
+    <p class="lead" lang="en">We know your time is valuable. Even a short conversation would mean a lot to us and to the students we will share it with back home.</p>
+    <p class="lead" lang="ko">귀한 시간이라는 걸 잘 알고 있습니다. 짧은 대화라도 저희에게, 그리고 돌아가서 이야기를 함께 나눌 학생들에게 큰 의미가 될 것입니다.</p>
     <ul class="ask-list">
-      <li><span class="n mono">01</span><div><b>A 20–30 minute conversation</b><span>In person during our visit, or online if that is easier for you.</span></div></li>
-      <li><span class="n mono">02</span><div><b>Your path and your team</b><span>How you got here, how your team works, and what you would tell students starting out.</span></div></li>
-      <li><span class="n mono">03</span><div><b>Questions sent in advance</b><span>We will share our questions ahead of time, so there is nothing for you to prepare.</span></div></li>
+      <li><span class="n mono">01</span><div><b lang="en">A 20–30 minute conversation</b><b lang="ko">20~30분의 대화</b><span lang="en">In person during our visit, or online if that is easier for you.</span><span lang="ko">방문 기간 중 직접 뵙거나, 편하시다면 온라인으로도 좋습니다.</span></div></li>
+      <li><span class="n mono">02</span><div><b lang="en">Your path and your team</b><b lang="ko">멘토님의 길과 팀 이야기</b><span lang="en">How you got here, how your team works, and what you would tell students starting out.</span><span lang="ko">지금의 자리에 오기까지의 과정, 팀이 일하는 방식, 그리고 이제 막 시작하는 학생에게 해주고 싶은 말.</span></div></li>
+      <li><span class="n mono">03</span><div><b lang="en">Questions sent in advance</b><b lang="ko">질문은 미리 보내드립니다</b><span lang="en">We will share our questions ahead of time, so there is nothing for you to prepare.</span><span lang="ko">질문을 미리 공유드리니 따로 준비하실 것은 없습니다.</span></div></li>
     </ul>
   </section>
 
   <!-- FAQ -->
   <section id="faq">
-    <h2><span class="hash mono">#</span>faq</h2>
+    <h2><span class="hash mono">#</span><span lang="en">FAQ</span><span lang="ko">자주 묻는 질문</span></h2>
     <details>
-      <summary>How long will it take?</summary>
-      <p>About 20–30 minutes. We are happy to work around your schedule.</p>
+      <summary><span lang="en">How long will it take?</span><span lang="ko">시간은 얼마나 걸리나요?</span></summary>
+      <p lang="en">About 20–30 minutes. We are happy to work around your schedule.</p>
+      <p lang="ko">20~30분 정도입니다. 일정은 멘토님께 맞추겠습니다.</p>
     </details>
     <details>
-      <summary>Where would we meet?</summary>
-      <p>Wherever is convenient for you: your office, a café nearby, or online.</p>
+      <summary><span lang="en">Where would we meet?</span><span lang="ko">어디서 만나나요?</span></summary>
+      <p lang="en">Wherever is convenient for you: your office, a café nearby, or online.</p>
+      <p lang="ko">편하신 곳이면 어디든 좋습니다. 사무실, 근처 카페, 온라인 모두 가능합니다.</p>
     </details>
     <details>
-      <summary>Will the conversation be recorded or shared?</summary>
-      <p>Only with your permission. If we share anything, we will send it to you for review first.</p>
+      <summary><span lang="en">Will the conversation be recorded or shared?</span><span lang="ko">대화를 녹음하거나 공유하나요?</span></summary>
+      <p lang="en">Only with your permission. If we share anything, we will send it to you for review first.</p>
+      <p lang="ko">허락해주실 때만 합니다. 공유할 내용이 있으면 먼저 보내드려 확인을 받겠습니다.</p>
     </details>
     <details>
-      <summary>What is the Global Challenge program?</summary>
-      <p>A program supported by Sungkyunkwan University that sends student teams abroad to explore a topic in depth and bring what they learn back to campus. SKKU, founded in 1398, is one of Korea's leading universities.</p>
+      <summary><span lang="en">What is the Global Challenge program?</span><span lang="ko">글로벌 챌린지 프로그램이 무엇인가요?</span></summary>
+      <p lang="en">A program supported by Sungkyunkwan University that sends student teams abroad to explore a topic in depth and bring what they learn back to campus. SKKU, founded in 1398, is one of Korea's leading universities.</p>
+      <p lang="ko">성균관대학교가 지원하는 프로그램으로, 학생 팀이 해외에서 한 주제를 깊이 탐구하고 배운 것을 학교에 돌아와 나눕니다. 1398년에 세워진 성균관대학교는 한국을 대표하는 대학 중 하나입니다.</p>
     </details>
   </section>
 
   <!-- AFTER THE TRIP -->
   <section id="after">
-    <h2><span class="hash mono">#</span>after the trip</h2>
+    <h2><span class="hash mono">#</span><span lang="en">After the Trip</span><span lang="ko">방문 이후</span></h2>
     <table class="news">
-      <tr><td class="mono">Feb 2027</td><td>Publish a trip report and interview notes on this site (with mentors' permission).</td></tr>
-      <tr><td class="mono">Mar 2027</td><td>Host a sharing seminar for students in our department.</td></tr>
+      <tr><td class="mono"><span lang="en">Feb 2027</span><span lang="ko">2027년 2월</span></td><td><span lang="en">Publish a trip report and interview notes on this site (with mentors' permission).</span><span lang="ko">방문 보고서와 인터뷰 기록을 이 사이트에 올립니다 (멘토님이 허락하신 내용만).</span></td></tr>
+      <tr><td class="mono"><span lang="en">Mar 2027</span><span lang="ko">2027년 3월</span></td><td><span lang="en">Host a sharing seminar for students in our department.</span><span lang="ko">학과 학생들을 위한 공유 세미나를 엽니다.</span></td></tr>
     </table>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <h2><span class="hash mono">#</span>contact</h2>
-    <p>Feel free to reach out by email, or connect with any of us on LinkedIn.</p>
+    <h2><span class="hash mono">#</span><span lang="en">Contact</span><span lang="ko">연락처</span></h2>
+    <p lang="en">Feel free to reach out by email, or connect with any of us on LinkedIn.</p>
+    <p lang="ko">이메일로 편하게 연락 주시거나, LinkedIn으로 팀원 누구에게든 연락 주세요.</p>
     <p style="margin-top:10px"><a class="mono" href="mailto:cheonjimin76@g.skku.edu">cheonjimin76@g.skku.edu</a></p>
   </section>
 
 </main>
 
 <footer>
-  © 2027 SKKU East Coast Team · Sungkyunkwan University Global Challenge
+  <span lang="en">© 2026 SKKU East Coast Team · Sungkyunkwan University Global Challenge</span>
+  <span lang="ko">© 2026 SKKU East Coast Team · 성균관대학교 글로벌 챌린지</span>
 </footer>
 
 <script>
   const root = document.documentElement;
+
+  // dark mode
   const btn = document.getElementById('themeBtn');
   try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
   btn.addEventListener('click', () => {
     const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
     root.dataset.theme = dark ? 'light' : 'dark';
     try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+  });
+
+  // language (default English; the first pick happens in <head> so the page never flashes the wrong language)
+  const langBtn = document.getElementById('langBtn');
+  const TITLES = { en: 'SKKU East Coast Team · Global Challenge 2027', ko: 'SKKU East Coast Team · 글로벌 챌린지 2027' };
+  function applyLang(l) {
+    root.dataset.lang = l;
+    root.lang = l;
+    document.title = TITLES[l];
+    langBtn.textContent = l === 'en' ? 'KO' : 'EN';
+    langBtn.setAttribute('aria-label', l === 'en' ? '한국어로 보기' : 'View in English');
+  }
+  applyLang(root.dataset.lang === 'ko' ? 'ko' : 'en');
+  langBtn.addEventListener('click', () => {
+    const next = root.dataset.lang === 'ko' ? 'en' : 'ko';
+    applyLang(next);
+    try { localStorage.setItem('lang', next); } catch (e) {}
+    try {
+      const u = new URL(location.href);
+      if (u.searchParams.has('lang')) { u.searchParams.set('lang', next); history.replaceState(null, '', u); }
+    } catch (e) {}
   });
 </script>
 </body>
