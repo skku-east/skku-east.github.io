@@ -9,9 +9,8 @@
      (링크를 받은 사람은 그대로 볼 수 있고, 링크 미리보기 카드도 그대로 뜸). 검색에 노출하려면 이 줄을 지우기 -->
 <meta name="robots" content="noindex, noimageindex">
 <!-- 링크 미리보기 (카톡·이메일·LinkedIn 등에 주소를 붙였을 때 뜨는 카드)
-     단체 사진이 생기면 아래 두 줄을 추가하고 twitter:card 를 summary_large_image 로 바꾸기 (주소는 https:// 부터 전체로)
-       <meta property="og:image" content="https://skku-east.github.io/photos/team.jpg">
-       <meta name="twitter:image" content="https://skku-east.github.io/photos/team.jpg"> -->
+     og-card.png = 얼굴 없이 팀 이름·질문·경로만 있는 1200×630 이미지. 이게 없으면 앱이 페이지의 첫 사진(팀원 얼굴)을 가져감.
+     이미지를 바꾸면 파일 이름도 바꿔야 카톡·LinkedIn이 예전 이미지를 다시 안 씀 (예: og-card-2.png) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://skku-east.github.io/">
 <meta property="og:site_name" content="SKKU East Coast Team">
@@ -19,9 +18,15 @@
 <meta property="og:description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="ko_KR">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://skku-east.github.io/og-card.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SKKU East Coast Team · Boston, New York, Washington DC">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="SKKU East Coast Team · Global Challenge 2027">
 <meta name="twitter:description" content="Five Sungkyunkwan University students following how AI moves from research to industry to society — Boston, New York, Washington DC, January 2027.">
+<meta name="twitter:image" content="https://skku-east.github.io/og-card.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
